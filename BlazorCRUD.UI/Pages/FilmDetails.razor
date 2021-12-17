@@ -2,7 +2,8 @@
 @page "/filmdetails/{id:int}"
 @using Model;
 @using Interfaces;
-@inject IFilmService FilmService;
+@inject IFilmService FilmService
+@inject NavigationManager NavigationManager
 
 <h1>FilmDetails</h1>
 
@@ -35,10 +36,13 @@
 
     Film film = new Film();
 
-    protected void CancelFilm() { }
+    protected void CancelFilm() {
+        NavigationManager.NavigateTo("/filmlist");
+    }
 
     protected async Task SaveFilm() {
         await FilmService.SaveFilm(film);
+        NavigationManager.NavigateTo("/filmlist");
     }
 
     protected async override Task OnInitializedAsync() {
@@ -46,6 +50,7 @@
             film.ReleaseDate = DateTime.Now;
         } else {
             film = await FilmService.GetDetails(id);
+
         }
     }
 }
