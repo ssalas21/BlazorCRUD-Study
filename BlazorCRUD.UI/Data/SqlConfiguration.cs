@@ -9,6 +9,5 @@ namespace BlazorCRUD.UI.Data {
         public SqlConfiguration(string connectionString) => ConnectionString = connectionString;
         public string ConnectionString { get; }
 
-
     }
 }
